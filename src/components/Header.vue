@@ -1,22 +1,30 @@
 <template>
   <div>
-    <input type="text" v-model="userSelect" @keyup.enter="emitSearch" />
-    <button class="btc"></button>
+    <SearchBar @search="passSearch" />
   </div>
 </template>
 
 <script>
+import SearchBar from "./SearchBar.vue";
+
 export default {
   name: "Header",
-
   data() {
     return {
-      userSelect: "",
+      searchedName: "",
     };
   },
+  components: {
+    SearchBar,
+  },
+
   methods: {
-    emitSearch() {
-      this.$emit("search", this.userSelect);
+    userSearchReassign(choice) {
+      this.searchedName = choice;
+    },
+    passSearch(userSelect) {
+      this.userSearchReassign(userSelect);
+      this.$emit("pass-search", this.searchedName);
     },
   },
 };

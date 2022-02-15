@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header :movies="movies" @search="search" />
+    <Header :movies="movies" @pass-search="search" />
     <Main :movies="movies" :series="series" />
   </div>
 </template>
@@ -28,14 +28,19 @@ export default {
     };
   },
   methods: {
-    search(userSelect) {
-      console.log(userSelect);
+    search(choice) {
+      console.log(choice);
+      if (!choice) {
+        this.movies = [];
+        this.series = [];
+        return;
+      }
       const { key, language } = this.api_moviedb;
       const config = {
         params: {
           api_key: key,
           language,
-          query: userSelect,
+          query: choice,
         },
       };
       this.fetchAPI("search/movie", config, "movies");
@@ -49,18 +54,7 @@ export default {
           console.log(this[target]);
         });
     },
-    // getFilmsAPI() {
-    //   axios
-    //     .get(
-    //       "https://api.themoviedb.org/3/search/movie?api_key=4dddbdfa5994addeb864ece0b1011f23&query=signore&language=it-IT"
-    //     )
-    //     .then((res) => {
-    //       this.movies = res.data.results;
-    //       console.log(this.movies);
-    //     });
-    // },
   },
-  mounted() {},
 };
 </script>
 
