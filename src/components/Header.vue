@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <SearchBar @search="passSearch" />
+  <div class="row justify-content-between py-4 header-style">
+    <div class="col-4">
+      <h1>BOOLFIX</h1>
+    </div>
+    <SearchBar @search="passSearch" class="col-3" />
   </div>
 </template>
 
@@ -30,5 +33,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang='scss'>
+.header-style {
+  background-color: rgb(49, 46, 46);
+  border-bottom: 2px black solid;
+  h1 {
+    color: red;
+    font-weight: 900;
+    -webkit-text-stroke: 2.5px black;
+  }
+}
 </style>

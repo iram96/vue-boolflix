@@ -1,7 +1,7 @@
 <template>
   <div>
     <input type="text" v-model="userSelect" @keyup.enter="emitSearch" />
-    <button class="btc"></button>
+    <button class="btc btn-light" @click="emitSearch">CERCA</button>
   </div>
 </template>
 
@@ -21,5 +21,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang='scss'>
+input {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding-left: 10px;
+}
 </style>

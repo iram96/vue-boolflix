@@ -1,25 +1,20 @@
 <template>
-  <div>
-    <div>
-      <div class="bgc-darkgray p-4">
-        <img
-          :src="`https://image.tmdb.org/t/p/w342` + this.item.poster_path"
-          :alt="item.title"
-        />
+  <div class="p-4 position-relative general-card">
+    <img :src="getImgPoster" :alt="item.title" class="poster" role="button" />
 
-        <h4 class="font-white">{{ item.title || item.name }}</h4>
-        <span class="font-14 text-center d-block my-3">{{
-          item.original_title || item.original_name
-        }}</span>
-        <span class="font-14 text-center d-block my-3">{{
-          item.vote_average
-        }}</span>
-        <div class="star-slot">
-          <Star :vote="item.vote_average" />
-        </div>
-
-        <img :src="flagImg" :alt="item.original_language" class="flag-class" />
+    <div class="position-absolute top-50 start-50 translate-middle infos">
+      <h4 class="font-white">{{ item.title || item.name }}</h4>
+      <span class="font-14 text-center d-block my-3">{{
+        item.original_title || item.original_name
+      }}</span>
+      <span class="font-14 text-center d-block my-3">{{
+        item.vote_average
+      }}</span>
+      <div class="star-slot">
+        <Star :vote="getVote" />
       </div>
+
+      <img :src="flagImg" :alt="item.original_language" class="flag-class" />
     </div>
   </div>
 </template>
@@ -41,32 +36,37 @@ export default {
     flagImg() {
       return require(`../assets/img/${this.item.original_language}.png`);
     },
-    getStars() {
-      let arraylist = this.starsList;
-      const stars = Math.ceil(this.item.vote_average / 2);
-      console.log(stars);
-      if (stars < 2) {
-        arraylist.push("star");
-      } else if (stars < 3) {
-        arraylist.push("star");
-      } else if (stars < 4) {
-        arraylist.push("star");
-      } else if (stars <= 5) {
-        arraylist.push("star");
-      }
-      console.log(arraylist);
-      return arraylist;
+    getVote() {
+      const vote = Math.ceil(this.item.vote_average / 2);
+      return vote;
     },
-  },
-  mounted() {
-    this.getStars();
+    getImgPoster() {
+      if (!this.item.poster_path) {
+        return "https://www.altavod.com/assets/images/poster-placeholder.png";
+      }
+      return `https://image.tmdb.org/t/p/w342` + this.item.poster_path;
+    },
   },
 };
 </script>
 
 <style scoped lang='scss'>
-.flag-class {
-  width: 30px;
-  height: 15px;
+.general-card {
+  .infos {
+    opacity: 0;
+    height: 100%;
+    min-width: 342px;
+    background-color: black;
+    transition: 0.5s;
+
+    .flag-class {
+      width: 30px;
+      height: 15px;
+    }
+  }
+}
+.general-card:hover .infos {
+  opacity: 1;
+  z-index: 1;
 }
 </style>

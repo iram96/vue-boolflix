@@ -1,9 +1,10 @@
 <template>
   <div>
     <i
-      v-for="(i, index) in this.vote"
-      :key="index"
-      class="fa-star fa-solid"
+      v-for="i in 5"
+      :key="i"
+      class="fa-star"
+      :class="i <= vote ? 'fa-solid' : 'fa-regular'"
     ></i>
   </div>
 </template>
@@ -12,6 +13,7 @@
 export default {
   name: "Star",
   props: ["vote"],
+  computed: {},
 };
 </script>
 
