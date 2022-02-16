@@ -56,6 +56,7 @@ export default {
 .main-style {
   border-bottom: 3px white;
   background-color: rgb(29, 27, 27);
+  min-height: 100vh;
   .section-title-style {
     color: rgb(177, 13, 13);
     font-weight: 700;

@@ -3,18 +3,23 @@
     <img :src="getImgPoster" :alt="item.title" class="poster" role="button" />
 
     <div class="position-absolute top-50 start-50 translate-middle infos">
-      <h4 class="font-white">{{ item.title || item.name }}</h4>
-      <span class="font-14 text-center d-block my-3">{{
-        item.original_title || item.original_name
-      }}</span>
-      <span class="font-14 text-center d-block my-3">{{
-        item.vote_average
-      }}</span>
-      <div class="star-slot">
-        <Star :vote="getVote" />
-      </div>
+      <div
+        class="position-absolute top-50 start-50 translate-middle text-white"
+        role="button"
+      >
+        <h4 class="font-white">{{ item.title || item.name }}</h4>
+        <span class="font-14 text-center d-block my-3">{{
+          item.original_title || item.original_name
+        }}</span>
+        <span class="font-14 text-center d-block my-3">{{
+          item.vote_average
+        }}</span>
+        <div class="star-slot text-warning">
+          <Star :vote="getVote" />
+        </div>
 
-      <img :src="flagImg" :alt="item.original_language" class="flag-class" />
+        <img :src="flagImg" :alt="item.original_language" class="flag-class" />
+      </div>
     </div>
   </div>
 </template>
